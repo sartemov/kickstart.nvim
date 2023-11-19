@@ -608,5 +608,14 @@ cmp.setup {
   },
 }
 
+-- Go
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
